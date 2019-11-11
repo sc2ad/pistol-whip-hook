@@ -1,0 +1,3 @@
+[submodule "QuestLoader"]
+	path = QuestLoader
+	url = https://github.com/sc2ad/QuestLoader
