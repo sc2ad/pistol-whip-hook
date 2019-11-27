@@ -13,7 +13,7 @@ Right now this loads mods (`.so` files) from `/sdcard/Android/data/com.cloudhead
 
 Uses [Android Inline Hook](https://github.com/ele7enxxh/Android-Inline-Hook) + some macros for magic
 
-Copy-paste `libmain.so` and `libmodloader.so` built from `QuestLoader` to the same directory as `libil2cpp.so`, which should be: `/data/app/com.cloudheadgames.pistolwhip/lib/arm64/`
+Copy-paste `libmain.so` and `libmodloader.so` built from `QuestLoader` to the same directory as `libil2cpp.so`, which should be: `/data/app/com.cloudheadgames.pistolwhip/lib/arm64-v8a/`
 
 Follow [Frida Without Root](https://koz.io/using-frida-on-android-without-root/) to learn how to inject the modloader-library into the apk (with the so built from this instead of frida)
 
