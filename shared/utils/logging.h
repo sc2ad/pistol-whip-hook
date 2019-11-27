@@ -16,19 +16,15 @@ enum LOG_VERBOSE_TYPE {
     DEBUG = ANDROID_LOG_DEBUG
 };
 
-#ifndef LOG_LEVEL
-#define LOG_LEVEL WARNING | ERROR | CRITICAL
-#endif
-
 #ifndef MOD_ID
 // This is too annoying, let's change it to default to some stupid stuff
-#error "'MOD_ID' must be defined in the mod!"
-// #define MOD_ID "PLACEHOLDER_MOD_ID"
+// #error "'MOD_ID' must be defined in the mod!"
+#define MOD_ID "PLACEHOLDER_MOD_ID"
 #endif
 #ifndef VERSION
 // This is too annoying, let's change it to default to some stupid stuff
-#error "'VERSION' must be defined in the mod!"
-// #define VERSION "0.0.0"
+// #error "'VERSION' must be defined in the mod!"
+#define VERSION "0.0.0"
 #endif
 
 #define TAG "QuestHook[" MOD_ID "|" VERSION "]"

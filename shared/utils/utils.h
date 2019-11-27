@@ -35,40 +35,40 @@ retval hook_ ## name(__VA_ARGS__)
 #ifdef __aarch64__
 
 #define INSTALL_HOOK(name) \
-log_print(INFO, "Installing 64 bit hook!"); \
+log(INFO, "Installing 64 bit hook!"); \
 A64HookFunction((void*)getRealOffset(addr_ ## name),(void*) hook_ ## name, (void**)&name); \
 
 #define INSTALL_HOOK_OFFSETLESS(name, methodInfo) \
-log_print(INFO, "Installing 64 bit offsetless hook!"); \
+log(INFO, "Installing 64 bit offsetless hook!"); \
 A64HookFunction((void*)methodInfo->methodPointer,(void*) hook_ ## name, (void**)&name); \
 
 #define INSTALL_HOOK_NAT(name) \
-log_print(INFO, "Installing 64 bit native hook!"); \
+log(INFO, "Installing 64 bit native hook!"); \
 A64HookFunction((void*)(addr_ ## name),(void*) hook_ ## name, (void**)&name); \
 
 #define INSTALL_HOOK_DIRECT(name, addr) \
-log_print(INFO, "Installing 64 bit direct hook!"); \
+log(INFO, "Installing 64 bit direct hook!"); \
 A64HookFunction((void*)addr, (void*) hook_ ## name, (void**)&name); \
 
 #else
 
 #define INSTALL_HOOK(name) \
-log_print(INFO, "Installing 32 bit hook!"); \
+log(INFO, "Installing 32 bit hook!"); \
 registerInlineHook((uint32_t)getRealOffset(addr_ ## name), (uint32_t)hook_ ## name, (uint32_t **)&name); \
 inlineHook((uint32_t)getRealOffset(addr_ ## name)); \
 
 #define INSTALL_HOOK_OFFSETLESS(name, methodInfo) \
-log_print(INFO, "Installing 32 bit offsetless hook!"); \
+log(INFO, "Installing 32 bit offsetless hook!"); \
 registerInlineHook((uint32_t)methodInfo->methodPointer, (uint32_t)hook_ ## name, (uint32_t **)&name); \
 inlineHook((uint32_t)methodInfo->methodPointer); \
 
 #define INSTALL_HOOK_NAT(name) \
-log_print(INFO, "Installing 32 bit native hook!"); \
+log(INFO, "Installing 32 bit native hook!"); \
 registerInlineHook((uint32_t)(addr_ ## name), (uint32_t)hook_ ## name, (uint32_t **)&name); \
 inlineHook((uint32_t)(addr_ ## name)); \
 
 #define INSTALL_HOOK_DIRECT(name, addr) \
-log_print(INFO, "Installing 32 bit offsetless hook!"); \
+log(INFO, "Installing 32 bit offsetless hook!"); \
 registerInlineHook((uint32_t)addr, (uint32_t)hook_ ## name, (uint32_t **)&name); \
 inlineHook((uint32_t)addr); \
 
