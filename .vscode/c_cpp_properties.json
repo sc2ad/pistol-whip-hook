@@ -1,8 +1,7 @@
 {
     "configurations": [
         {
-            "intelliSenseMode": "gcc-x64",
-            "name": "Win64",
+            "name": "ARM8",
             "includePath": [
                 "${workspaceFolder}/**",
                 "~/Downloads/ndk-bundle/**"
@@ -10,10 +9,13 @@
             "defines": [
                 "_DEBUG",
                 "UNICODE",
-                "_UNICODE"
+                "_UNICODE",
+                "__aarch64__"
             ],
             "windowsSdkVersion": "10.0.18362.0",
+            "compilerPath": "~/Downloads/ndk-bundle/prebuilt/windows-x86_64/bin/ndk-gdb.cmd",
             "cStandard": "c11",
+            "intelliSenseMode": "clang-x64",
             "cppStandard": "c++20"
         }
     ],

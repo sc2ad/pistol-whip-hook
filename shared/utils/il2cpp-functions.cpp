@@ -423,7 +423,7 @@ void il2cpp_functions::Init() {
     // MANUALLY DEFINED CONST DEFINITIONS
     *(void**)(&class_get_type_const) = dlsym(imagehandle, "il2cpp_class_get_type");
     log(INFO, "Loaded: il2cpp_class_get_type CONST VERSION!");
-    *(void**)(&il2cpp_functions::class_get_name_const) = dlsym(imagehandle, "il2cpp_class_get_name");
+    *(void**)(&class_get_name_const) = dlsym(imagehandle, "il2cpp_class_get_name");
     log(INFO, "Loaded: il2cpp_class_get_name CONST VERSION!");
 
     dlclose(imagehandle);
