@@ -21,6 +21,7 @@ include $(CLEAR_VARS)
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
 LOCAL_LDLIBS    := -llog
+LOCAL_CFLAGS    := -DMOD_ID='"HashMod"' -DVERSION='"1.0.0"'
 LOCAL_MODULE    := hashmod
 LOCAL_CPPFLAGS  := -std=c++2a -fno-rtti -Os
 

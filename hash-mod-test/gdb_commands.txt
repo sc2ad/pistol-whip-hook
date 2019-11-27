@@ -1,0 +1,4 @@
+set  disassemble-next-line on
+show disassemble-next-line
+display /8i $pc
+set breakpoint pending on

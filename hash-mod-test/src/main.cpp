@@ -1,3 +1,8 @@
+// IMPORTANT!
+// In order to properly build this library, you must provide an ndkpath.txt which points to your ndk-bundle directory
+// This is used in the build and debug powershell scripts, which will build/debug for you.
+// Author: Sc2ad
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
