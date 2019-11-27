@@ -2,7 +2,7 @@
 #define UTILS_H_INCLUDED
 
 // Location of libil2cpp.so
-#define IL2CPP_SO_PATH "/data/app/com.cloudheadgames.pistolwhip/lib/arm64/libil2cpp.so"
+#define IL2CPP_SO_PATH "/data/app/com.cloudheadgames.pistolwhip/lib/arm64-v8a/libil2cpp.so"
 
 #include <stdio.h>
 #include <stdlib.h>
