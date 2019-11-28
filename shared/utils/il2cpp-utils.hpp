@@ -239,6 +239,9 @@ namespace il2cpp_utils {
     // Created by zoller27osu
     const MethodInfo* GetMethod(Il2CppClass* klass, std::string_view methodName, int argsCount);
 
+    // Returns the MethodInfo for the method on class found via namespace and name with the given name and number of arguments
+    const MethodInfo* GetMethod(std::string_view nameSpace, std::string_view className, std::string_view methodName, int argsCount);
+
     template<class TOut, class... TArgs>
     // Runs a MethodInfo with the specified parameters and instance, with return type TOut
     // Assumes a static method if instance == nullptr
