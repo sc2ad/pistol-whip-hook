@@ -4,3 +4,6 @@
 [submodule "BnkParser"]
 	path = BnkParser
 	url = https://github.com/sc2ad/BnkParser.git
+[submodule "PolyHook_2_0"]
+	path = PolyHook_2_0
+	url = https://github.com/stevemk14ebr/PolyHook_2_0.git

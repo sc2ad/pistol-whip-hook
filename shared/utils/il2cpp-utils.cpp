@@ -72,6 +72,10 @@ namespace il2cpp_utils {
         return methodInfo;
     }
 
+    const MethodInfo* GetMethod(std::string_view nameSpace, std::string_view className, std::string_view methodName, int argsCount) {
+        return GetMethod(GetClassFromName(nameSpace.data(), className.data()), methodName, argsCount);
+    }
+
     FieldInfo* FindField(Il2CppClass* klass, std::string_view fieldName) {
         if (!klass) return nullptr;
         auto field = il2cpp_functions::class_get_field_from_name(klass, fieldName.data());

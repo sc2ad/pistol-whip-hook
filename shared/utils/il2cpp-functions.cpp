@@ -8,7 +8,6 @@
 // Initializes all of the IL2CPP functions via dlopen and dlsym for use.
 void il2cpp_functions::Init() {
     if (initialized) {
-        log(INFO, "il2cpp_functions: Already initialized!");
         return;
     }
     log(INFO, "il2cpp_functions: Init: Initializing all IL2CPP Functions...");
