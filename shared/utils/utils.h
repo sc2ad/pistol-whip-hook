@@ -10,6 +10,7 @@
 #include "typedefs.h"
 #include "utils-functions.hpp"
 #include "../inline-hook/And64InlineHook.hpp"
+#include "../../PolyHook_2_0/headers/Detour/x64Detour.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,6 +35,8 @@ retval hook_ ## name(__VA_ARGS__)
 
 #ifdef __aarch64__
 
+// ARM64 HOOKS
+
 #define INSTALL_HOOK(name) \
 log(INFO, "Installing 64 bit hook!"); \
 A64HookFunction((void*)getRealOffset(addr_ ## name),(void*) hook_ ## name, (void**)&name); \
@@ -51,6 +54,30 @@ log(INFO, "Installing 64 bit direct hook!"); \
 A64HookFunction((void*)addr, (void*) hook_ ## name, (void**)&name); \
 
 #else
+
+#ifdef __x86_64__
+
+// PC HOOKS
+
+#define INSTALL_HOOK(name) \
+log(INFO, "Installing x86/64 bit hook!"); \
+PolyHook::((void*)getRealOffset(addr_ ## name),(void*) hook_ ## name, (void**)&name); \
+
+#define INSTALL_HOOK_OFFSETLESS(name, methodInfo) \
+log(INFO, "Installing x86/64 bit offsetless hook!"); \
+A64HookFunction((void*)methodInfo->methodPointer,(void*) hook_ ## name, (void**)&name); \
+
+#define INSTALL_HOOK_NAT(name) \
+log(INFO, "Installing x86/64 bit native hook!"); \
+A64HookFunction((void*)(addr_ ## name),(void*) hook_ ## name, (void**)&name); \
+
+#define INSTALL_HOOK_DIRECT(name, addr) \
+log(INFO, "Installing x86/64 bit direct hook!"); \
+A64HookFunction((void*)addr, (void*) hook_ ## name, (void**)&name); \
+
+#else
+
+// ARM32 HOOKS
 
 #define INSTALL_HOOK(name) \
 log(INFO, "Installing 32 bit hook!"); \
@@ -72,7 +99,9 @@ log(INFO, "Installing 32 bit offsetless hook!"); \
 registerInlineHook((uint32_t)addr, (uint32_t)hook_ ## name, (uint32_t **)&name); \
 inlineHook((uint32_t)addr); \
 
-#endif
+#endif /* __x86_64__ or other */
+
+#endif /* __aarch64__ or other */
 
 #ifdef __cplusplus
 }
