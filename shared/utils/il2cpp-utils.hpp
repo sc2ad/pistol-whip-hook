@@ -3,7 +3,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#ifndef _WINDOWS_
 #include <dlfcn.h>
+#endif
 #include <string>
 #include <string_view>
 #include <unordered_map>

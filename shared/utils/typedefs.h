@@ -3,13 +3,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <dlfcn.h>
 #include <type_traits>
 #include <cassert>
+#ifndef _WINDOWS_
 #include "../libil2cpp/il2cpp-api-types.h"
 #include "../libil2cpp/il2cpp-class-internals.h"
 #include "../libil2cpp/il2cpp-object-internals.h"
 #include "../libil2cpp/il2cpp-tabledefs.h"
+#else
+#include "libil2cpp/il2cpp-api-types.h"
+#include "libil2cpp/il2cpp-class-internals.h"
+#include "libil2cpp/il2cpp-object-internals.h"
+#include "libil2cpp/il2cpp-tabledefs.h"
+#endif
 
 #ifndef __cplusplus
 typedef struct Il2CppObject {

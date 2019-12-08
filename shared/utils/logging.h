@@ -1,19 +1,34 @@
 #ifndef LOGGING_H
 #define LOGGING_H
 
+#ifndef _WINDOWS_
 #include <android/log.h>
+#include <unistd.h>
+enum LOG_VERBOSE_TYPE {
+	CRITICAL = ANDROID_LOG_FATAL,
+	ERROR = ANDROID_LOG_ERROR,
+	WARNING = ANDROID_LOG_WARN,
+	INFO = ANDROID_LOG_INFO,
+	DEBUG = ANDROID_LOG_DEBUG
+};
+#else
+#ifdef ERROR
+#undef ERROR
+#endif
+
+enum LOG_VERBOSE_TYPE {
+	CRITICAL = 1,
+	ERROR = 2,
+	WARNING = 3,
+	INFO = 4,
+	DEBUG = 5
+};
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <unistd.h>
 
-enum LOG_VERBOSE_TYPE {
-    CRITICAL = ANDROID_LOG_FATAL,
-    ERROR = ANDROID_LOG_ERROR,
-    WARNING = ANDROID_LOG_WARN,
-    INFO = ANDROID_LOG_INFO,
-    DEBUG = ANDROID_LOG_DEBUG
-};
+
 
 #ifndef MOD_ID
 // This is too annoying, let's change it to default to some stupid stuff
@@ -29,6 +44,7 @@ enum LOG_VERBOSE_TYPE {
 #define TAG "QuestHook[" MOD_ID "|" VERSION "]"
 
 namespace logging {
+#ifndef _WINDOWS_
     #define log_base(lvl, ...) __android_log_print(lvl, TAG, __VA_ARGS__)
     #define log_vbase(lvl, ...) __android_log_vprint(lvl, TAG, __VA_ARGS__)
 
@@ -43,6 +59,55 @@ namespace logging {
         return log_base(level, args...);
     }
     #pragma clang diagnostic pop
+#else
+#include <windows.h>
+	static HANDLE log_handle;
+	char buffer[4096];
+
+	inline void init_logger(HANDLE handle)
+	{
+		log_handle = handle;
+	}
+
+	inline void free_logger()
+	{
+		CloseHandle(log_handle);
+	}
+
+	#pragma clang diagnostic push
+	#pragma clang diagnostic ignored "-Wformat-security"
+	template<typename... TArgs>
+	inline int log(LOG_VERBOSE_TYPE level, LPCSTR message, TArgs ...args) {
+		if (!log_handle) {
+			// Cannot log without a valid log handle!
+			return -1;
+		}
+		char arr[4096+12];
+		switch (level) {
+			case CRITCAL:
+				strcpy_s(arr, "CRITICAL: ");
+				break;
+			case ERROR:
+				strcpy_s(arr, "ERROR: ");
+				break;
+			case WARNING:
+				strcpy_s(arr, "WARNING: ");
+				break;
+			case INFO:
+				strcpy_s(arr, "INFO: ");
+				break;
+			case DEBUG:
+				strcpy_s(arr, "DEBUG: ");
+				break;
+		}
+		size_t len = wsprintfA(buffer, message, args);
+		strcat_s(arr, buffer);
+		WriteFile(log_handle, arr, len, NULL, NULL);
+		FlushFileBuffers(log_handle);
+		return 0;
+	}
+	#pragma clang diagnostic pop
+#endif
 }
 using logging::log;
 
@@ -50,6 +115,7 @@ using logging::log;
 #define STD_BUFFER_SIZE 256
 #endif
 
+#ifndef _WINDOWS_
 // From: https://codelab.wordpress.com/2014/11/03/how-to-use-standard-output-streams-for-logging-in-android-apps/
 static int pfd[2];
 static pthread_t thr;
@@ -86,5 +152,5 @@ extern "C" {
         return 0;
     }
 }
-
+#endif /* _WINDOWS_ */
 #endif /* LOGGING_H */

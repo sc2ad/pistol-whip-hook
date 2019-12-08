@@ -3,8 +3,13 @@ shared/libil2cpp/libil2cpp/
 
 shared/libil2cpp/
 
-hash-mod-test/ndkpath.txt
+ndkpath.txt
 
 obj/
 
 libs/
+
+.vs/
+
+Debug/
+Release/

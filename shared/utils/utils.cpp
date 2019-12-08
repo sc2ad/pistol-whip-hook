@@ -1,16 +1,17 @@
 // thx https://github.com/jbro129/Unity-Substrate-Hook-Android
 
-#include <jni.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-
 #include "utils.h"
+#ifndef _WINDOWS_
+#include <jni.h>
 #include <android/log.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#endif
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <dlfcn.h>
-#include <unistd.h>
 #include <iostream>
 #include <fstream>
 
